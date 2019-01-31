@@ -14,7 +14,9 @@ function FriendsList (props) {
                         <h1>{stuff.name}</h1>
                         <p>{stuff.age}</p>
                         <p>{stuff.email}</p>
+                        <button onClick={ event => props.deleteFriend(event,stuff)}>Delete Friend</button>
                         <hr></hr>
+                        
                     </div>
                 )               
             })}
