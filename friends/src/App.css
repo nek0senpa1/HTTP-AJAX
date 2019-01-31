@@ -30,3 +30,28 @@
     transform: rotate(360deg);
   }
 }
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid rgb(19, 73, 145);
+  text-decoration: none;
+  color: #1c5d76;
+  padding: 4px;
+  box-shadow: #282c34;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #1c5d76;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.nav-links a:last-of-type {
+  margin-right: 0;
+}
+
+.nav-links a.active {
+  border-bottom: 1px solid #1c5d76;
+}
