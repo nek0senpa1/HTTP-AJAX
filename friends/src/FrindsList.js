@@ -1,9 +1,11 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
 function FriendsList (props) {
     console.log(props)
     return(
         <div>
+            <NavLink to="/add-form" className="nav-links">Add Friendo!</NavLink>
             <h1>Friends of the Friends</h1>
             <hr></hr>
             {props.friends.map( stuff => {

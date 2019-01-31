@@ -7,12 +7,20 @@ import './App.css';
 import FriendsList from './FrindsList';
 import FriendAdd from './components/FriendAdd';
 
+
+const newfrand = {
+  name: '',
+  age:'',
+  email:''
+}
+
 class App extends Component {
   constructor(){
     super()
 
     this.state = {
-      friends: []
+      friends: [],
+      newFriend: newfrand
     }
 
   }
@@ -31,7 +39,17 @@ class App extends Component {
     })
   }
 
+  handleChanges = e => {
+    this.setState({
+      newFriend: {
+        ...this.state.newFriend,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
   addFriend = event => {
+    event.preventDefault();
     console.log('adding friendo here')
   }
 
@@ -40,10 +58,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1>ALL THE FRIENDS!</h1>
-          <NavLink to="/add-form" className="nav-links">Add Friendo!</NavLink>
-
           
-
           <Route
             exact path="/"
             render ={props => <FriendsList friends={this.state.friends} />}
@@ -51,7 +66,12 @@ class App extends Component {
 
           <Route
             exact path="/add-form"
-            render={props => <FriendAdd {...props} addFriend={this.addFriend} />}
+            render={props => 
+              <FriendAdd {...props} 
+              addFriend={this.addFriend} 
+              newFriend={this.state.newFriend} 
+              handleChanges={this.handleChanges}
+              />}
           />
 
         </header>

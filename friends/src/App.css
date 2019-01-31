@@ -33,7 +33,7 @@
 
 .nav-links {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   border: 2px solid rgb(19, 73, 145);
   text-decoration: none;
   color: #1c5d76;
