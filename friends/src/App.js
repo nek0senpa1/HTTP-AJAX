@@ -10,6 +10,7 @@ import FriendUpdate from './components/FriendUpdate';
 
 
 const newfrand = {
+  id: '',
   name: '',
   age:'',
   email:''
@@ -21,7 +22,8 @@ class App extends Component {
 
     this.state = {
       friends: [],
-      newFriend: newfrand
+      newFriend: newfrand,
+      updFriend:newfrand
     }
 
   }
@@ -40,10 +42,25 @@ class App extends Component {
     })
   }
 
+  firstUpdate = (e, stuff) => {
+    this.setState({
+      updFriend: stuff
+    })
+  }
+
   handleChanges = e => {
     this.setState({
       newFriend: {
         ...this.state.newFriend,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
+  handleChanges2 = e => {
+    this.setState({
+      updFriend: {
+        ...this.state.updFriend,
         [e.target.name]: e.target.value
       }
     });
@@ -66,7 +83,7 @@ class App extends Component {
   }
 
   deleteFriend = (event, deadFriend) => {
-    event.preventDefault();
+    
     console.log(`Deleting ${deadFriend.name} here`)
 
     axios
@@ -80,9 +97,21 @@ class App extends Component {
     })
   }
 
+ 
+
   updateFriend = (event, upFriend) => {
+    
+
     event.preventDefault();
-    console.log(`Updating ${upFriend.name}`)
+    console.log(`Updating ${this.state.updFriend.name}`)
+    axios
+    .put(`http://localhost:5000/friends/${this.state.updFriend.id}`, this.state.updFriend)
+    .then(res => {
+      console.log (res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   render() {
@@ -99,6 +128,7 @@ class App extends Component {
               deleteFriend={this.deleteFriend}
               friends={this.state.friends} 
               updateFriend={this.updateFriend}
+              firstUpdate={this.firstUpdate}
               />}
           />
 
@@ -112,6 +142,16 @@ class App extends Component {
               />}
           />
 
+            <Route
+              path="/update"
+              render={props => 
+              <FriendUpdate {...props} 
+              friend={this.state.updFriend}
+              updateFriend={this.updateFriend}
+              firstUpdate={this.firstUpdate}
+              handleChanges={this.handleChanges2}
+              />}
+          />   
                
 
         </header>
