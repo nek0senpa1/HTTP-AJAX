@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 //import ReactDom from 'react-dom';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, NavLink, withRouter } from "react-router-dom";
 
 import './App.css';
 import FriendsList from './FrindsList';
 import FriendAdd from './components/FriendAdd';
+import FriendUpdate from './components/FriendUpdate';
 
 
 const newfrand = {
@@ -15,8 +16,8 @@ const newfrand = {
 }
 
 class App extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
 
     this.state = {
       friends: [],
@@ -56,6 +57,7 @@ class App extends Component {
     .post('http://localhost:5000/friends', this.state.newFriend)
     .then( res => {
       console.log(res)
+      
     })
     .catch( err => {
       console.log(err)
@@ -71,10 +73,16 @@ class App extends Component {
     .delete(`http://localhost:5000/friends/${deadFriend.id}`)
     .then (res => {
       console.log(res)
+      
     })
     .catch (err => {
       console.log(err)
     })
+  }
+
+  updateFriend = (event, upFriend) => {
+    event.preventDefault();
+    console.log(`Updating ${upFriend.name}`)
   }
 
   render() {
@@ -90,6 +98,7 @@ class App extends Component {
               {...props}
               deleteFriend={this.deleteFriend}
               friends={this.state.friends} 
+              updateFriend={this.updateFriend}
               />}
           />
 
@@ -103,13 +112,14 @@ class App extends Component {
               />}
           />
 
-        </header>
+               
 
-        
+        </header>
 
       </div>
     );
   }
 }
+
 
 export default App;

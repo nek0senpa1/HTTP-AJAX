@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
-function FriendAdd(props) {
+function FriendUpdate(props) {
     console.log(props)
   return (
     <div>
-        <h2>ADD NEW FRIEND HERE !!!</h2>
+        <h2>UPDATE FRIEND HERE !</h2>
       <form onSubmit={props.addFriend}>
         <input
           type="text"
@@ -37,7 +37,7 @@ function FriendAdd(props) {
         
         <br />
         <button type="submit" className="md-button form-button">
-          Add Friend{" "}
+          Update Friend{" "}
         </button>
         <br />
         <br></br>
@@ -47,4 +47,4 @@ function FriendAdd(props) {
   );
 }
 
-export default FriendAdd;
+export default FriendUpdate;
